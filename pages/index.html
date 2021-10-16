@@ -1,27 +1,25 @@
-<html>
-<head>
-    <title>Test Page</title>
-    <script>
-        /*
-    window.onload = function() {
-        let d = new Date();
-        const date = d.getFullYear()+'-'+d.getDate()+'-'+d.getDay();
-        document.getElementById("date").value = date;
-        
-        //check if date changed
-        console.log(document.getElementById("date").value);
-    };
-    */
-    </script>
-</head>
-<body>
-    <h1>Order</h1>
-    <form action="https://localhost:8000/orders" method="POST">
-        <!--<input id="date" type="hidden" name="date" value="0">-->
-        <input type="text" name="type" placeholder="Phone Model">
-        <input type="text" name="customerName" placeholder="Customer Name">
-        <button type="submit" name="submit">Order</button>
-    </form>
-</body>
-
-</html>
+<html>  
+    <head>
+        <title>Testing Page</title>
+        <script>
+        window.onload = function() {
+            let d = new Date();
+            const date = d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();
+            document.getElementById("date").value = date;
+            
+            //check if date changed
+            console.log(document.getElementById("date").value);
+        };
+        </script>
+    </head>
+<body>  
+    <h1>Form</h1>
+    <form action="http://localhost:8000/orders" method="GET"> 
+        Title: <input type="text" name="title"><br>
+        <input id="date" type="hidden" name="date">  
+        Type: <input type="text" name="type"> <br>
+        Name: <input type="text" name="customer"> <br>
+        <input type="submit" value="Submit">  
+    </form>  
+</body>  
+</html>  
