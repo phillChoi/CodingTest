@@ -13,13 +13,24 @@
         </script>
     </head>
 <body>  
-    <h1>Form</h1>
-    <form action="http://localhost:8000/orders" method="GET"> 
+    <section>
+    <h1>Post Form</h1>
+    <form action="http://localhost:8000/orders" method="POST"> 
         Title: <input type="text" name="title"><br>
         <input id="date" type="hidden" name="date">  
         Type: <input type="text" name="type"> <br>
         Name: <input type="text" name="customer"> <br>
         <input type="submit" value="Submit">  
     </form>  
+    </section>
+
+    <section>
+        <h1>Get Form</h1>
+        <form action="http://localhost:8000/orders" method="GET">
+            id: <input type="text" name="id">
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
 </body>  
 </html>  
