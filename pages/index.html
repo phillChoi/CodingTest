@@ -4,7 +4,10 @@
         <script>
         window.onload = function() {
             let d = new Date();
-            const date = d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();
+            let year = d.getFullYear();
+            let month = ("0"+(d.getMonth() +1)).slice(-2);
+            let day = ("0"+d.getDate()).slice(-2);
+            const date = [year,month,day].join("-");
             document.getElementById("date").value = date;
             //check if date changed
             console.log(document.getElementById("date").value);
@@ -17,7 +20,13 @@
     <form action="http://localhost:8000/orders" method="POST"> 
         Title: <input type="text" name="title"><br>
         <input id="date" type="hidden" name="date">  
-        Type: <input type="text" name="type"> <br>
+        <label>Choose a model:</label> 
+        <select name="type">
+            <option value="GalaxyS20">GalaxyS20</option>
+            <option value="iPhone13">iPhone13</option>
+            <option value="Lumia8">Lumia8</option>
+            <option value="OnePlus8">OnePlus8</option>
+        </select> <br>
         Name: <input type="text" name="customer"> <br>
         <input type="submit" value="Submit">  
     </form>  
