@@ -30,7 +30,7 @@ When the user fills in the form and submits it, it will navigate the user to `/o
 The user can get the information for a specfic order ID by entering into the address bar `localhost:8000/orders/{id}`. An example of this is `localhost:8000/orders/2`. If you have forgotten about the details of the orders created, you can open `orders.json` located in the `output` folder of the project. It will return the query on the webpage and also in **Terminal**.
 
 ### Get order based off type and date
-Similarly to the previous GET, type into the address bar the type and date of the order `localhost:8000/{type}/{date}`. The date is formatted as `YYYYMMDD`. An example of this is `localhost:8000/GalaxyS20`. It will return the query on the webpage and also in **Terminal**.
+Similarly to the previous GET, type into the address bar the type and date of the order `localhost:8000/{type}/{date}`. The date is formatted as `YYYYMMDD`. An example of this is `localhost:8000/GalaxyS20/20211019`. This will count all orders for the GalaxyS20 on 19-10-2021, list the order id's and each unique customer. It will return the query on the webpage and also in **Terminal**.
 
 ## Technologies
 * Javascript
