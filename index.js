@@ -57,7 +57,7 @@ app.post('/orders', function (req, res) {
                     console.log("Database Successfully created at: "+directory);
                 }
             });
-            res.end(JSON.stringify(response)); 
+            res.end(JSON.stringify(response,null,2)); 
         };
     } catch(err){
         console.log(err);
