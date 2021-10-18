@@ -19,12 +19,12 @@ app.post('/orders', function (req, res) {
         title:req.body.title,
         date:req.body.date,
         type:req.body.type,  
-        name:req.body.customer
+        customer:req.body.customer
     };
     try{
         //Check if there already is an output JSON file (used to simulate database).
         if (fs.existsSync(directory)){
-            console.log("This file exists");
+            //console.log("This file exists");
             fs.readFile(directory, 'utf-8', (error, jsonFile) => {
                 if (error) {
                     console.log("Error reading file: " + error);
@@ -38,7 +38,7 @@ app.post('/orders', function (req, res) {
                         if (err2){
                             console.log("There has been an error: "+err2);
                         }else {
-                            console.log("File Successfully updated.")
+                            console.log("Order successfully added.")
                             res.end(JSON.stringify(response)); 
                         }
                     })
@@ -46,10 +46,9 @@ app.post('/orders', function (req, res) {
             })
     
         } else { 
-            //Create JSON file if not exists   
+            //Create JSON file if doesn't exist. 
             let databaseArray = [];
             databaseArray.push(response);
-            //console.log(databaseArray);  
             let order = JSON.stringify(databaseArray, null, 2);
             fs.writeFile(directory, order, err5 => {
                 if(err5){
@@ -69,7 +68,7 @@ app.get('/orders/:id', function (req, res){
     let id = req.params.id;
     fs.access(directory, (err)=> {
         if(err){
-            console.log(err);
+            console.log("File not found: "+err);
         }else{
             //Fetching data stored in orders.json
             fs.readFile(directory, (err2, jsonFile) =>{
@@ -77,9 +76,8 @@ app.get('/orders/:id', function (req, res){
                     console.log(err2);
                 }else{
                     let data = JSON.parse(jsonFile);
-                    //console.log('File found.');
                     let found = false;
-                    //Simple for loop to iterate through JSON data
+                    //Simple for loop to iterate through JSON data.
                     for(i = 0; i < data.length; i++){
                         let entryId = data[i].id;
                         if(entryId == id){
@@ -99,6 +97,50 @@ app.get('/orders/:id', function (req, res){
     });
 });
 
-app.get('orders/:type/:date',function(req,res){
-    
+app.get('/orders/:type/:date', function(req,res){
+    let type = req.params.type;
+    let date = req.params.date;
+    let fDate = date.slice(0,4)+'-'+date.slice(4,6)+'-'+date.slice(6,8); //Reformatted date to match stored dates.
+    fs.access(directory, (err) => {
+        if(err){
+            console.log("File not found: "+err);
+        }else{
+            fs.readFile(directory, (err2, jsonFile) => {
+                if (err2){
+                    console.log(err2);
+                }else{
+                    let data = JSON.parse(jsonFile);
+                    //console.log(data);
+                    let counter = 0;
+                    let orders = [];
+                    let customers = [];
+                    data.forEach(element => {
+                        //Check for matching type and date.
+                        if(element.type == type && element.date == fDate){
+                            counter++
+                            orders.push(element.id);
+                            //Only push in unique customer names.
+                            if(customers.indexOf(element.customer) === -1){
+                                customers.push(element.customer);
+                            }
+                        }; 
+                    }); 
+                    //Final check if any orders were found.
+                    if(counter == 0){
+                        console.log("There are no orders for this type and date.");
+                        res.end("No orders were found.");
+                    }else{
+                        let response = {
+                            type: req.params.type,
+                            count: counter,
+                            orders: orders,
+                            "related-customers": customers
+                        };
+                        console.log(response);
+                        res.end(JSON.stringify(response,null,2));
+                    };
+                };
+            });
+        };
+    });
 });
