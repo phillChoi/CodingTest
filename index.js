@@ -65,13 +65,40 @@ app.post('/orders', function (req, res) {
     }; 
 }); 
 
-
 app.get('/orders/:id', function (req, res){
-    let id = req.query.id;
-
-    console.log(response);
-    res.end(JSON.stringify(response));
+    let id = req.params.id;
+    fs.access(directory, (err)=> {
+        if(err){
+            console.log(err);
+        }else{
+            //Fetching data stored in orders.json
+            fs.readFile(directory, (err2, jsonFile) =>{
+                if(err2){
+                    console.log(err2);
+                }else{
+                    let data = JSON.parse(jsonFile);
+                    //console.log('File found.');
+                    let found = false;
+                    //Simple for loop to iterate through JSON data
+                    for(i = 0; i < data.length; i++){
+                        let entryId = data[i].id;
+                        if(entryId == id){
+                            console.log("Order found");
+                            console.log(data[i]);
+                            res.end(JSON.stringify(data[i],null,2));
+                            found = true;
+                            break;
+                        }
+                    };
+                    if (!found){
+                        console.log("Entry ID not found.");
+                    };
+                };
+            });
+        };
+    });
 });
 
 app.get('orders/:type/:date',function(req,res){
+    
 });
