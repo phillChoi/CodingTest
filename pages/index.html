@@ -18,7 +18,7 @@
     <section>
     <h1>Post Form</h1>
     <form action="http://localhost:8000/orders" method="POST"> 
-        Title: <input type="text" name="title"><br>
+        Title: <input type="text" name="title" required><br>
         <input id="date" type="date" name="date"><br>
         <label>Choose a model:</label> 
         <select name="type">
@@ -27,7 +27,7 @@
             <option value="Lumia8">Lumia8</option>
             <option value="OnePlus8">OnePlus8</option>
         </select> <br>
-        Name: <input type="text" name="customer"> <br>
+        Name: <input type="text" name="customer" required> <br>
         <input type="submit" value="Submit">  
     </form>  
     </section>
