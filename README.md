@@ -39,3 +39,9 @@ Similarly to the previous GET, type into the address bar the type and date of th
 	* [Express](https://www.npmjs.com/package/express) - Backend framework
 	* [fs](https://nodejs.org/api/fs.html) - Node's inbuilt file system
 	* [nodemon](https://www.npmjs.com/package/nodemon) - Restarts application when changes have been made. For developer purposes.
+
+## Resources
+List of resources used to solve the problem: 
+* [Express API reference](http://expressjs.com/en/4x/api.html#app.listen)
+* [File system documentation](https://nodejs.org/api/fs.html)
+* [JavaScript reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) - for syntax purposes.
