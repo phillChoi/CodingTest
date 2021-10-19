@@ -118,6 +118,9 @@ app.get('/orders/:type/:date', function(req,res){
                         //Check for matching type and date.
                         if(element.type == type && element.date == fDate){
                             counter++
+                            if(orders.length == 10){
+                                orders.shift();
+                            };
                             orders.push(element.id);
                             //Only push in unique customer names.
                             if(customers.indexOf(element.customer) === -1){
